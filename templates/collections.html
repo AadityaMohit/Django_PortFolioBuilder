@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #001f3f; /* Navy */
+        }
+        .header {
+            position: relative;
+            height: 500px;
+            color: #505858; /* Dark cyan-like color */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: #001f3f; /* Navy */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar img {
+            height: 50px;
+        }
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+        .navbar .links a {
+            text-decoration: none;
+            color: #7bd4e6;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+        .navbar .links a:hover {
+            color: #505858;
+        }
+        .navbar .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar .buttons button,
+        .navbar .buttons a {
+            background-color: #505858; /* Dark cyan-like color */
+            border: none;
+            border-radius: 25px;
+            height: 40px;
+            width: 100px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .navbar .buttons button:hover,
+        .navbar .buttons a:hover {
+            background: linear-gradient(#7bd4e6, #232323);
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .header button {
+            background-color: #505858; /* Dark cyan-like color */
+            border: none;
+            border-radius: 25px;
+            height: 50px;
+            width: 200px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .header button:hover {
+            background: linear-gradient(#7bd4e6, #232323);
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .templates {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .template {
+            background: radial-gradient(rgb(159, 228, 255), rgb(201, 211, 196));
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .template:hover {
+            transform: scale(1.05);
+        }
+        .template img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .template h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .template p {
+            font-size: 1em;
+            margin: 10px 0 20px 0;
+        }
+        .template button {
+            background-color: #505858; /* Dark cyan-like color */
+            border: none;
+            border-radius: 20px;
+            height: 40px;
+            width: 120px;
+            color: white;
+            background: linear-gradient(#232323, #7bd4e6);
+            cursor: pointer;
+        }
+        .template button:hover {
+            background: linear-gradient(#7bd4e6, #232323);
+        }
+        .footer {
+            background: #7bd4e6;
+            color: whitesmoke;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="navbar">
+            <img src="/static/logo.jpeg" alt="Logo">
+            <div class="links">
+                <a href="#templates">Templates</a>
+                <a href="#more">More</a>
+            </div>
+            <div class="buttons">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signin' %}">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+        <h1 style="color: white;">Welcome to the Portfolio Generator</h1>
+        <p style="color: white;">Become our member by signing up and get templates for free</p>
+       <a href="{% url 'portfolio_form' %}"> <button type="button">Get Your Template NOW</button></a>
+    </div>
+    <div class="content" id="templates">
+        <h2 style="color: white;">Our Portfolio Templates</h2>
+        <div class="templates">
+            <div class="template">
+                <img src="/static/s1.png" alt="Template 1 Image">
+                <h2>Template 1</h2>
+                <p>A clean and modern template for showcasing your work.</p>
+                <a href="/template1"><button type="button">Preview</button></a>
+            </div>
+            <div class="template">
+                <img src="/static/s2.png" alt="Template 2 Image">
+                <h2>Template 2</h2>
+                <p>An elegant template with a focus on visuals.</p>
+                <a href="/template2"><button type="button">Preview</button></a>
+            </div>
+            <div class="template">
+                <img src="/static/s3.png" alt="Template 3 Image">
+                <h2>Template 3</h2>
+                <p>A professional template perfect for portfolios and resumes.</p>
+                <a href="/template3"><button type="button">Preview</button></a>
+            </div>
+            <!-- Add more templates as needed -->
+        </div>
+    </div>
+    <div class="footer" style="background:#001f3f ;" id="more">
+        <p>&copy; 2024 Portfolio Generator. All rights reserved.</p>
+    </div>
+</body>
+</html>

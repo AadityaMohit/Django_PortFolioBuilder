@@ -1,0 +1,142 @@
+{% extends "home.html" %}
+{% block body %}
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioBuilder Features</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <section class="features">
+        <div class="container">
+            <div class="feature">
+                <i class="fas fa-laptop-code"></i>
+                <h2>Customizable Templates</h2>
+                <p>Choose from a variety of templates to match your style and needs.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-images"></i>
+                <h2>Rich Media Support</h2>
+                <p>Easily add images, videos, and other media to showcase your work.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-user-shield"></i>
+                <h2>Privacy Controls</h2>
+                <p>Manage who can view your portfolio with robust privacy settings.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-share-alt"></i>
+                <h2>Easy Sharing</h2>
+                <p>Share your portfolio with potential employers and clients with ease.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <h2>Responsive Design</h2>
+                <p>Your portfolio will look great on any device, from desktops to mobile phones.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-search"></i>
+                <h2>SEO Optimization</h2>
+                <p>Optimize your portfolio for search engines to increase visibility.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PortfolioBuilder. All rights reserved.</p>
+        </div>
+    </footer>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #001f3f;
+            color: white;
+        }
+        
+        header {
+            background: #001f3f;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        header p {
+            font-size: 1.2em;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        .features {
+            padding: 50px 0;
+            background: #001f3f;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            background: #004080;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .feature i {
+            font-size: 3em;
+            color: white;
+        }
+        
+        .feature h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        
+        .feature p {
+            font-size: 1em;
+            color: #d3d3d3;
+        }
+        
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        
+    </style>
+    <script>
+        document.querySelectorAll('.feature').forEach(item => {
+            item.addEventListener('click', event => {
+                alert('Feature clicked: ' + event.currentTarget.querySelector('h2').innerText);
+            });
+        });
+    </script>
+    
+</body>
+</html>
+
+{% endblock body %}

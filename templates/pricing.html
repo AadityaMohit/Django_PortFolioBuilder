@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioBuilder Pricing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body> 
+    <br>
+    <br><br> <nav class="navbar">
+    <a class="navbar-brand" href=" ">Portfolio Builder</a>
+    <div class="navbar-nav">
+        <div class="nav-item active">
+            <a class="nav-link" href="/home">Home</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/features">Features</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/pricing">Pricing</a>
+        </div>
+        <div class="nav-item" style="color: #f8f9fa;">
+            {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">
+                Logout <i class="fas fa-sign-out-alt"></i>
+            </a>
+            
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signin' %}">Sign Up</a>
+        {% endif %}
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </div>
+    </div>
+</nav>
+    <header>
+        <div class="container">
+            <h1>PortfolioBuilder Pricing</h1>
+            <p>Choose a plan that fits your needs</p>
+        </div>
+    </header>
+    <section class="pricing">
+        <div class="container">
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h2>Basic</h2>
+                    <p class="price">$0<span>/month</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Basic Templates</li>
+                        <li><i class="fas fa-check"></i> Up to 10 Projects</li>
+                        <li><i class="fas fa-check"></i> Basic Support</li>
+                        <li><i class="fas fa-times"></i> Custom Domain</li>
+                        <li><i class="fas fa-times"></i> Advanced Analytics</li>
+                    </ul>
+                    <a href="#" class="btn">Sign Up</a>
+                </div>
+                <div class="pricing-card">
+                    <h2>Pro</h2>
+                    <p class="price">$9<span>/month</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> All Basic Features</li>
+                        <li><i class="fas fa-check"></i> Up to 50 Projects</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Custom Domain</li>
+                        <li><i class="fas fa-times"></i> Advanced Analytics</li>
+                    </ul>
+                    <a href="#" class="btn">Sign Up</a>
+                </div>
+                <div class="pricing-card">
+                    <h2>Premium</h2>
+                    <p class="price">$19<span>/month</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> All Pro Features</li>
+                        <li><i class="fas fa-check"></i> Unlimited Projects</li>
+                        <li><i class="fas fa-check"></i> Dedicated Support</li>
+                        <li><i class="fas fa-check"></i> Custom Domain</li>
+                        <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                    </ul>
+                    <a href="#" class="btn">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PortfolioBuilder. All rights reserved.</p>
+        </div>
+    </footer>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #001f3f;
+            color: white;
+        }
+        
+        header {
+            background: #001f3f;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .navbar {
+            background-color: #001f3f; /* Navy */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            display: block;
+            float: left;
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #0056b3; /* Lighter Navy */
+        }
+        .navbar .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar .navbar-toggler {
+            display: none;
+        }
+        .navbar .navbar-nav {
+            float: right;
+        }
+        .navbar .nav-item {
+            float: left;
+        }
+        .navbar .nav-item a {
+            display: block;
+        }
+        header p {
+            font-size: 1.2em;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        .pricing {
+            padding: 50px 0;
+            background: #001f3f;
+        }
+        
+        .pricing-table {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .pricing-card {
+            background: #004080;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            width: 30%;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .pricing-card h2 {
+            font-size: 1.8em;
+            margin: 10px 0;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+        
+        .pricing-card .price span {
+            font-size: 0.5em;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .pricing-card ul li {
+            margin: 10px 0;
+            font-size: 1em;
+        }
+        
+        .pricing-card ul li i {
+            color: #00ff00;
+            margin-right: 10px;
+        }
+        
+        .pricing-card ul li i.fa-times {
+            color: #ff0000;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #00ff00;
+            color: #001f3f;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background: #00cc00;
+        }
+        
+        footer {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        
+    </style>
+</body>
+</html>

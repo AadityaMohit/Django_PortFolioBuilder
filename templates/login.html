@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #001f3f; /* Navy */
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+        .login-container {
+            background: #004080; /* Darker Navy */
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 50px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #00ff00; /* Green */
+            color: #001f3f; /* Navy */
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00cc00; /* Darker Green */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+        }    /* Navigation Bar */
+        .navbar {
+            background-color: #001f3f; /* Navy */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            display: block;
+            float: left;
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #0056b3; /* Lighter Navy */
+        }
+        .navbar .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar .navbar-toggler {
+            display: none;
+        }
+        .navbar .navbar-nav {
+            float: right;
+        }
+        .navbar .nav-item {
+            float: left;
+        }
+        .navbar .nav-item a {
+            display: block;
+        }
+
+    </style>
+</head>
+<body> <nav class="navbar">
+    <a class="navbar-brand" href=" ">Portfolio Builder</a>
+    <div class="navbar-nav">
+        <div class="nav-item active">
+            <a class="nav-link" href="/home">Home</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/features">Features</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/pricing">Pricing</a>
+        </div>
+        <div class="nav-item" style="color: #f8f9fa;">
+            {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">
+                Logout <i class="fas fa-sign-out-alt"></i>
+            </a>
+            
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signin' %}">Sign Up</a>
+        {% endif %}
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </div>
+    </div>
+</nav><br><br><br>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            {% if form.errors %}
+                <div class="error-message">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

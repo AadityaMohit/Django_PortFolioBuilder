@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Form</title>
+
+    <script>
+        function addSkillField() {
+            const formIdx = document.querySelectorAll('.skill-form').length - 1;
+            const newForm = document.querySelector('.skill-form-empty').cloneNode(true);
+            newForm.innerHTML = newForm.innerHTML.replace(/__prefix__/g, formIdx);
+            newForm.classList.remove('skill-form-empty');
+            newForm.style.display = 'block';
+            document.getElementById('skills').appendChild(newForm);
+            
+            // Update TOTAL_FORMS
+            const totalForms = document.querySelector('#id_skills-TOTAL_FORMS');
+            totalForms.value = parseInt(totalForms.value) + 1;
+        }
+
+        function addProjectImageField() {
+            const formIdx = document.querySelectorAll('.project-image-form').length - 1;
+            const newForm = document.querySelector('.project-image-form-empty').cloneNode(true);
+            newForm.innerHTML = newForm.innerHTML.replace(/__prefix__/g, formIdx);
+            newForm.classList.remove('project-image-form-empty');
+            newForm.style.display = 'block';
+            document.getElementById('project_images').appendChild(newForm);
+            
+            // Update TOTAL_FORMS
+            const totalForms = document.querySelector('#id_project_images-TOTAL_FORMS');
+            totalForms.value = parseInt(totalForms.value) + 1;
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-form, .project-image-form {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .skill-form-empty, .project-image-form-empty {
+            display: none;
+        }
+
+        input[type="text"], input[type="file"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Form</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="skills">
+            {{ skill_formset.management_form }}
+            {% for form in skill_formset %}
+                <div class="skill-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addSkillField()">Add Skill</button>
+
+        <div id="project_images">
+            {{ project_image_formset.management_form }}
+            {% for form in project_image_formset %}
+                <div class="project-image-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addProjectImageField()">Add Project Image</button>
+        
+        {{ template_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <div class="skill-form skill-form-empty">
+        {{ skill_formset.empty_form.as_p }}
+    </div>
+    <div class="project-image-form project-image-form-empty">
+        {{ project_image_formset.empty_form.as_p }}
+    </div>
+</body>
+</html>
